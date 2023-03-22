@@ -26,12 +26,6 @@
                   "id": "db",
                   "value": "dbConnectionString"
                 }
-              },
-              "DOCKER_USERNAME": {
-                "fromParameterStore": "docker.hub.username"
-              },
-              "DOCKER_PASSWORD": {
-                "fromParameterStore": "docker.hub.password"
               }
             }
           },
