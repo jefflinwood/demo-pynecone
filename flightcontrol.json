@@ -1,0 +1,51 @@
+{
+    "environments": [
+      {
+        "id": "production",
+        "name": "Production",
+        "region": "us-west-2",
+        "source": {
+          "branch": "main"
+        },
+        "services": [
+          {
+            "id": "my-pynecone-app",
+            "name": "My Pynecone App",
+            "type": "fargate",
+            "dockerfilePath": "Dockerfile",
+            "dockerContext": ".",
+            "cpu": 0.25,
+            "memory": 0.5,
+            "domain": "www.example.com",
+            "port": 3000,
+            "minInstances": 1,
+            "maxInstances": 1,
+            "envVariables": {
+              "DATABASE_URL": {
+                "fromService": {
+                  "id": "db",
+                  "value": "dbConnectionString"
+                }
+              },
+              "DOCKER_USERNAME": {
+                "fromParameterStore": "docker.hub.username"
+              },
+              "DOCKER_PASSWORD": {
+                "fromParameterStore": "docker.hub.password"
+              }
+            }
+          },
+          {
+            "id": "db",
+            "name": "Database",
+            "type": "rds",
+            "engine": "postgres",
+            "engineVersion": "12",
+            "instanceSize": "db.t4g.micro",
+            "storage": 20,
+            "private": false
+          }
+        ]
+      }
+    ]
+  }
