@@ -9,25 +9,29 @@
         },
         "services": [
           {
-            "id": "my-pynecone-app",
-            "name": "My Pynecone App",
+            "id": "pynecone-frontend",
+            "name": "Pynecone Front End",
             "type": "fargate",
-            "dockerfilePath": "Dockerfile",
+            "dockerfilePath": "Dockerfile.frontend",
             "dockerContext": ".",
-            "cpu": 0.25,
-            "memory": 0.5,
-            "domain": "www.example.com",
+            "cpu": 2,
+            "memory": 4,
             "port": 3000,
             "minInstances": 1,
-            "maxInstances": 1,
-            "envVariables": {
-              "DATABASE_URL": {
-                "fromService": {
-                  "id": "db",
-                  "value": "dbConnectionString"
-                }
-              }
-            }
+            "maxInstances": 1
+          },
+          {
+            "id": "pynecone-backend",
+            "name": "Pynecone Back End",
+            "type": "fargate",
+            "dockerfilePath": "Dockerfile.backend",
+            "dockerContext": ".",
+            "cpu": 0.5,
+            "memory": 1,
+            "healthCheckPath": "/healthcheck",
+            "port": 8000,
+            "minInstances": 1,
+            "maxInstances": 1
           },
           {
             "id": "db",
