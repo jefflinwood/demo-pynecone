@@ -26,6 +26,5 @@ FROM runtime
 COPY --chown=pynecone --from=init /app/ /app/
 USER pynecone
 WORKDIR /app
-#CMD ["pc","run" , "--env", "prod"]
-CMD pc run --env prod --no-backend
+CMD pc run --env prod --no-backend && tail -f /dev/null
 EXPOSE 3000
