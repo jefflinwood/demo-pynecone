@@ -34,8 +34,13 @@ def index() -> pc.Component:
         padding_top="10%",
     )
 
+#healthcheck
+async def health_check():
+    return "Running"
+
 
 # Add state and page to the app.
 app = pc.App(state=State)
 app.add_page(index)
+app.api.add_api_route("/healthcheck", health_check, methods=["GET"])
 app.compile()
